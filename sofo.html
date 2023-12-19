@@ -1,0 +1,113 @@
+<html>
+    <head>
+    <style>
+        .container{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+        .box{
+            display:grid;
+            border:1px solid black;
+            width:auto;
+            height:auto;
+        }
+        .item1,.item2,.item3,.item4,.item5,.item6,.item7,.item8,.item9{
+            border:1px solid black;
+            width:100px;
+            height:100px;
+        }
+        h1{text-align: center;
+        }
+    </style>
+    </head>
+    <body>
+        <h1>tik tak toe</h1>
+        <div class="container">
+           
+             <div class="box">
+                <div class="item1"></div>
+                <div class="item2"></div>
+                <div class="item3"></div>
+             </div>
+             <div class="box">
+                <div class="item4"></div>
+                <div class="item5"></div>
+                <div class="item6"></div>
+             </div>
+             <div class="box">
+                <div class="item7"></div>
+                <div class="item8"></div>
+                <div class="item9"></div>
+             </div>
+        </div>
+    </body>
+    <script>
+        container=document.querySelector(".container");
+        item1=document.querySelector(".item1");
+        item2=document.querySelector(".item2");
+        item3=document.querySelector(".item3");
+        item4=document.querySelector(".item4");
+        item5=document.querySelector(".item5");
+        item6=document.querySelector(".item6");
+        item7=document.querySelector(".item7");
+        item8=document.querySelector(".item8");
+        item9=document.querySelector(".item9");
+        let player="X";
+        let count=0;
+
+        function checkWin() {
+            let winCombos = [
+                [item1, item2, item3],
+                [item4, item5, item6],
+                [item7, item8, item9],
+                [item1, item4, item7],
+                [item2, item5, item8],
+                [item3, item6, item9],
+                [item1, item5, item9],
+                [item3, item5, item7]
+            ];
+
+            for (let combo of winCombos) {
+                if (combo[0].textContent === player && combo[1].textContent === player && combo[2].textContent === player) {
+                    alert(player + " won!");
+                    // Additional code to handle the win condition, such as resetting the game or updating a score, would go here
+                    return true;
+                }
+            }
+            if (count === 9) {
+                alert('Draw!');
+                // Additional code to handle a draw, such as resetting the game, would go here
+                return true;
+            }
+            return false;
+        }
+
+        function switchPlayer() {
+            player = (player === "X") ? "O" : "X";
+        }
+
+        function makeMove(item) {
+            if (item.textContent === "") {
+                item.textContent = player;
+                count++;
+                if (!checkWin()) {
+                    switchPlayer();
+                }
+            } else {
+                alert("already filled");
+            }
+        }
+
+        item1.addEventListener("click", function() { makeMove(item1); });
+        item2.addEventListener("click", function() { makeMove(item2); });
+        item3.addEventListener("click", function() { makeMove(item3); });
+        item4.addEventListener("click", function() { makeMove(item4); });
+        item5.addEventListener("click", function() { makeMove(item5); });
+        item6.addEventListener("click", function() { makeMove(item6); });
+        item7.addEventListener("click", function() { makeMove(item7); });
+        item8.addEventListener("click", function() { makeMove(item8); });
+        item9.addEventListener("click", function() { makeMove(item9); });
+        // Repeat the same for item3 through item9
+    </script>
+    </html>
